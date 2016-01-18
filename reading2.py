@@ -3,10 +3,21 @@ import numpy
 
 def main():
     script = sys.argv[0]
-    filename = sys.argv[1]
-    data = numpy.loadtxt(filename, delimiter=',')
-    for m in data.mean(axis=1):
-        print(m)
+    action = sys.argv[1]
+    filenames = sys.argv[2:]
 
+    for filename in filenames:
+        data = numpy.loadtxt(filename, delimiter=',')
 
-reading.py (second version)
+        if action == '--min':
+                values = data.min(axis=1)
+        elif action == '--max':
+                values = data.max(axis=1)
+        elif action == '--mean':
+                values = data.mean(axis=1)
+
+        for m in values:
+                print(m)
+
+main()
+
